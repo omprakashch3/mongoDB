@@ -32,7 +32,20 @@ async function createCourse() {
 // createCourse();
 // //how to retreve document from mongoDB
 async function getCourses() {
-  const courses = await Course.find();
+  // comparison operators in mongodB
+  // gt,gte,lt,lte,ne,eq,in,nin
+  // logical operators- or & and
+
+  const courses = await Course
+    // .find({ author: "om", isPublished: true })
+    .find()
+    .or([{ author: "om" }, { isPublished: true }])
+    .and([{ author: "om" }, { isPublished: true }]) //it is similar to normal find method
+    // .find({ price: { $gte: 10, $lte: 20 } })
+    // .find({ price: { $in: [10, 15, 20] } })
+    .limit(10)
+    .sort({ name: 1 })
+    .select({ name: 1, tags: 1 });
   console.log(courses);
 }
 
