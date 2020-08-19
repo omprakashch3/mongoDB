@@ -36,8 +36,7 @@ async function getCourses() {
   // gt,gte,lt,lte,ne,eq,in,nin
   // logical operators- or & and
 
-  const courses = await Course
-    // .find({ author: "om", isPublished: true })
+  const courses = await Course.find({ author: "om", isPublished: true })
     // .find()
     // .or([{ author: "om" }, { isPublished: true }])
     // .and([{ author: "om" }, { isPublished: true }]) //it is similar to normal find method
@@ -47,14 +46,15 @@ async function getCourses() {
     // regular expression
     // ex:author starts with om
     // .find({ author: /pattern/ })//syntax
-    .find({ author: /^om/ }) //starts with om
-    .find({ author: /chautala$/ }) //ends with chautala & it s case sensetive
-    .find({ author: /chautala$/i }) //its case insensetive
-    .find({ author: /.*om.*/ }) //contains "om"
+    // .find({ author: /^om/ }) //starts with om
+    // .find({ author: /chautala$/ }) //ends with chautala & it s case sensetive
+    // .find({ author: /chautala$/i }) //its case insensetive
+    // .find({ author: /.*om.*/ }) //contains "om"
 
     .limit(10)
     .sort({ name: 1 })
-    .select({ name: 1, tags: 1 });
+    .select({ name: 1, tags: 1 })
+    .count();
   console.log(courses);
 }
 
